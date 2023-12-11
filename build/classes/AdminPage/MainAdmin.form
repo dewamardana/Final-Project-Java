@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="jMenu1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Mode"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="menuDarkMode">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Light Mode"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuDarkModeActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Menu>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="menu" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="subMenuPanel1" min="-2" pref="165" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="mainForm" pref="790" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="menu" alignment="0" pref="651" max="32767" attributes="0"/>
+          <Component id="subMenuPanel1" alignment="1" max="32767" attributes="0"/>
+          <Component id="mainForm" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="MainKomponen.SubMenuPanel" name="subMenuPanel1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+            <EmptyBorder bottom="1" left="1" right="1" top="80"/>
+          </Border>
+        </Property>
+      </Properties>
+    </Container>
+    <Container class="MainKomponen.Menu" name="menu">
+      <Properties>
+        <Property name="mainForm" type="MainKomponen.MainForm" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="mainForm"/>
+        </Property>
+        <Property name="subMenuPanel" type="MainKomponen.SubMenuPanel" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="subMenuPanel1"/>
+        </Property>
+      </Properties>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/MainLogo/logo.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="MainKomponen.MenuItem" name="menuItem1">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/MainLogo/produk-0.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="menuItem1"/>
+            <Property name="menuIcon" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="MainLogo/produk-1.png"/>
+                <StringItem index="1" value="MainLogo/produk-2.png"/>
+                <StringItem index="2" value="MainLogo/produk-3.png"/>
+              </StringArray>
+            </Property>
+            <Property name="menuModel" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="Tambah Produk"/>
+                <StringItem index="1" value="Edit Produk"/>
+                <StringItem index="2" value="Hapus Produk"/>
+              </StringArray>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="MainKomponen.MenuItem" name="menuItem2">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/MainLogo/pegawai-0.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="menuItem2"/>
+            <Property name="menuIcon" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="MainLogo/pegawai-1.png"/>
+                <StringItem index="1" value="MainLogo/pegawai-2.png"/>
+                <StringItem index="2" value="MainLogo/pegawai-3.png"/>
+              </StringArray>
+            </Property>
+            <Property name="menuModel" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="5">
+                <StringItem index="0" value="Tambah Pegawai"/>
+                <StringItem index="1" value="Edit Pegawai"/>
+                <StringItem index="2" value="Hapus Pegawai"/>
+                <StringItem index="3" value=" "/>
+                <StringItem index="4" value=" "/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItem2ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="MainKomponen.MenuItem" name="menuItem3">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="ff" red="0" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/MainLogo/diskon-0.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="menuItem3"/>
+            <Property name="menuIcon" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="MainLogo/diskon-1.png"/>
+                <StringItem index="1" value="MainLogo/diskon-2.png"/>
+                <StringItem index="2" value="MainLogo/diskon-3.png"/>
+                <StringItem index="3" value=" "/>
+              </StringArray>
+            </Property>
+            <Property name="menuModel" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Tambah Diskon"/>
+                <StringItem index="1" value="Edit Diskon"/>
+                <StringItem index="2" value="Hapus Diskon"/>
+                <StringItem index="3" value=" "/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItem3ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="MainKomponen.MenuItem" name="menuItem5">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/MainLogo/data-transaksi-0.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="menuItem5"/>
+            <Property name="menuIcon" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="MainLogo/data-transaksi-1.png"/>
+              </StringArray>
+            </Property>
+            <Property name="menuModel" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="Data Transaksi"/>
+              </StringArray>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="MainKomponen.MenuItem" name="menuItem4">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/MainLogo/EXIT.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="menuItem4"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="MainKomponen.MainForm" name="mainForm">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+    </Container>
+  </SubComponents>
+</Form>
