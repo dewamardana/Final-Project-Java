@@ -193,9 +193,31 @@
         <Component class="MainKomponen.MenuItem" name="menuItem4">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/MainLogo/EXIT.png"/>
+              <Image iconType="3" name="/MainLogo/transaksi-0.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="menuItem4"/>
+            <Property name="menuIcon" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="MainLogo/produk-1.png"/>
+                <StringItem index="1" value="MainLogo/produk-2.png"/>
+                <StringItem index="2" value="MainLogo/produk-3.png"/>
+              </StringArray>
+            </Property>
+            <Property name="menuModel" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="Tambah Suppliyer"/>
+                <StringItem index="1" value="Edit Suppliyer"/>
+                <StringItem index="2" value="Hapus Suppliyer"/>
+              </StringArray>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="MainKomponen.MenuItem" name="menuItem6">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/MainLogo/EXIT.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="menuItem6"/>
           </Properties>
         </Component>
       </SubComponents>

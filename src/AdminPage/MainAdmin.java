@@ -26,7 +26,7 @@ public class MainAdmin extends javax.swing.JFrame {
         menu.addEventMenuSelected(new EventMenu() {
             @Override
             public void mainMenuSelected(MainForm mainForm, int index, MenuItem menuItem) {
-                if (index ==  4){
+                if (index ==  5){
                     new LoginMain().setVisible(true);
                     dispose();
                         EventQueue.invokeLater(() -> {
@@ -59,9 +59,15 @@ public class MainAdmin extends javax.swing.JFrame {
                 }else if (index == 2 && subMenuIndex == 2){
                     mainForm.displayForm(new Panel9());
                 }else if (index == 3 && subMenuIndex == 0){
-                    mainForm.displayForm(new Panel10());
-                }else{
+                    mainForm.displayForm(new Panel10()); 
+                }else if (index == 4 && subMenuIndex == 0){
                     mainForm.displayForm(new Panel11());
+                }else if (index == 4 && subMenuIndex == 1){
+                    mainForm.displayForm(new Panel12());
+                }else if (index == 4 && subMenuIndex == 2){
+                    mainForm.displayForm(new Panel13());
+                }else{
+                    mainForm.displayForm(new Panel14());
                 }
             }
         });
@@ -79,6 +85,7 @@ public class MainAdmin extends javax.swing.JFrame {
         menuItem3 = new MainKomponen.MenuItem();
         menuItem5 = new MainKomponen.MenuItem();
         menuItem4 = new MainKomponen.MenuItem();
+        menuItem6 = new MainKomponen.MenuItem();
         mainForm = new MainKomponen.MainForm();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -163,9 +170,23 @@ public class MainAdmin extends javax.swing.JFrame {
         });
         menu.add(menuItem5);
 
-        menuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainLogo/EXIT.png"))); // NOI18N
+        menuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainLogo/transaksi-0.png"))); // NOI18N
         menuItem4.setText("menuItem4");
+        menuItem4.setMenuIcon(new javax.swing.AbstractListModel() {
+            String[] strings = { "MainLogo/produk-1.png", "MainLogo/produk-2.png", "MainLogo/produk-3.png" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        menuItem4.setMenuModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Tambah Suppliyer", "Edit Suppliyer", "Hapus Suppliyer" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
         menu.add(menuItem4);
+
+        menuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainLogo/EXIT.png"))); // NOI18N
+        menuItem6.setText("menuItem6");
+        menu.add(menuItem6);
 
         jMenu1.setText("Mode");
 
@@ -254,6 +275,7 @@ public class MainAdmin extends javax.swing.JFrame {
     private MainKomponen.MenuItem menuItem3;
     private MainKomponen.MenuItem menuItem4;
     private MainKomponen.MenuItem menuItem5;
+    private MainKomponen.MenuItem menuItem6;
     private MainKomponen.SubMenuPanel subMenuPanel1;
     // End of variables declaration//GEN-END:variables
 }
