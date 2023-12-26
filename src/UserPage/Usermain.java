@@ -153,7 +153,7 @@ public class Usermain extends javax.swing.JFrame {
 
         jMenu1.setText("Mode");
 
-        menuDarkMode.setText("Dark Mode");
+        menuDarkMode.setText("Light Mode");
         menuDarkMode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuDarkModeActionPerformed(evt);
@@ -188,7 +188,7 @@ public class Usermain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuDarkModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDarkModeActionPerformed
-        if (menuDarkMode.isSelected()) {
+        if (!menuDarkMode.isSelected()) {
             EventQueue.invokeLater(() -> {
                 FlatAnimatedLafChange.showSnapshot();
                 FlatDarculaLaf.setup();

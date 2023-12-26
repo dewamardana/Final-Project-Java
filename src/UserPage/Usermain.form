@@ -11,7 +11,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JCheckBoxMenuItem" name="menuDarkMode">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Dark Mode"/>
+                <Property name="text" type="java.lang.String" value="Light Mode"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuDarkModeActionPerformed"/>

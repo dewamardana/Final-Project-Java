@@ -13,8 +13,11 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import Koneksi.DatabaseKoneksi;
 import UserPage.Usermain;
+import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
+import java.awt.EventQueue;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -119,9 +122,21 @@ boolean Akses() {
                     Timer timer = new Timer(700, (ActionEvent e) -> {
                         if(state == true){
                             new MainAdmin().setVisible(true);
+                            EventQueue.invokeLater(() -> {
+                            FlatAnimatedLafChange.showSnapshot();
+                            FlatDarculaLaf.setup();
+                            FlatLaf.updateUI();
+                            FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                            });
                             dispose();
                         }else{
                             new Usermain().setVisible(true);
+                            EventQueue.invokeLater(() -> {
+                            FlatAnimatedLafChange.showSnapshot();
+                            FlatDarculaLaf.setup();
+                            FlatLaf.updateUI();
+                            FlatAnimatedLafChange.hideSnapshotWithAnimation();
+                            });
                             dispose();
                         }
                     });
