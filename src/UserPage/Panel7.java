@@ -279,7 +279,7 @@ public class Panel7 extends javax.swing.JPanel {
     private void loadBarang(String productCode) {
     
         // Query SQL untuk mendapatkan informasi produk berdasarkan kode produk
-        String query = "SELECT nama, harga FROM tb_barang WHERE id_barang = ?";
+        String query = "SELECT nama, harga_jual FROM tb_barang WHERE id_barang = ?";
         
         try (PreparedStatement preparedStatement = connect.prepareStatement(query)) {
             preparedStatement.setString(1, productCode);
@@ -288,7 +288,7 @@ public class Panel7 extends javax.swing.JPanel {
                 if (resultSet.next()) {
                     // Memuat data ke dalam JTextField sesuai dengan hasil query
                     txt_namaBarang.setText(resultSet.getString("nama"));
-                    txt_hargaAwal.setText(resultSet.getString("harga"));
+                    txt_hargaAwal.setText(resultSet.getString("harga_jual"));
                     
                     
                 } else {

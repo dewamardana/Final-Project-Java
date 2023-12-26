@@ -46,6 +46,8 @@ public class Panel4 extends javax.swing.JPanel {
 
     private Connection connect = DatabaseKoneksi.createConnection();
     DefaultTableModel table = new DefaultTableModel();
+    int hargaPokokAdd = 0;
+    int TotalhargaPokok = 0;
     
     public Panel4() {
        initComponents();
@@ -63,9 +65,10 @@ public class Panel4 extends javax.swing.JPanel {
         
         tampilData();
         totalnya();
+        totalModal();
     }
     
-        private void cariMember(){
+    private void cariMember(){
         table.setRowCount(0);
         table.setColumnIdentifiers(new Object[]{"ID Member", "Nama", "Alamat", "Jumlah Poin", "Tanggal Daftar"});
         
@@ -285,6 +288,7 @@ public class Panel4 extends javax.swing.JPanel {
         if(add){
             addToCart();
             totalnya();
+            totalModal();
         }
         
     }else if (a == 2){
@@ -409,7 +413,33 @@ public class Panel4 extends javax.swing.JPanel {
 
     private void showMessage(String message, String title) {
         JOptionPane.showMessageDialog(null, message, title, JOptionPane.ERROR_MESSAGE);
-}
+    }
+    
+    private int cekHargaPokok(String productCode) {
+        // Query SQL untuk mendapatkan informasi produk berdasarkan kode produk
+        String query = "SELECT harga_rataRata FROM tb_barang WHERE id_barang = ?";
+        int hargaPokok = 0;
+        
+        try (PreparedStatement preparedStatement = connect.prepareStatement(query)) {
+            preparedStatement.setString(1, productCode);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Memuat data ke dalam JTextField sesuai dengan hasil query
+                   hargaPokok = Integer.parseInt(resultSet.getString("harga_rataRata"));
+                } else {
+                    // Kode produk tidak ditemukan
+                    System.out.println("Harga Pokok Tidak Ditemukan");
+                    
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // Handle eksepsi SQL sesuai dengan kebutuhan aplikasi Anda
+        }
+        
+        return hargaPokok;
+    }
 
     private void addToCart(){
         int cartId = AmbilIdCart();
@@ -419,6 +449,7 @@ public class Panel4 extends javax.swing.JPanel {
         int hargabarang = 0;
         int jumlah = 0;
         int total = 0;
+        int hargaPokok = hargaPokokAdd;
             try {
                 hargabarang = Integer.parseInt(txt_harga.getText());
                 jumlah = Integer.parseInt(txt_jumlah.getText());
@@ -428,10 +459,10 @@ public class Panel4 extends javax.swing.JPanel {
                 // Tangani eksepsi jika nilai harga tidak dapat diubah menjadi angka
                 JOptionPane.showMessageDialog(null, "Masukkan nilai harga yang valid.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-       
+       if (hargaPokokAdd != 0){
         //query untuk memasukan data
-        String query = "INSERT INTO `tb_cart` (`id_cart`, `id_barang`, `nama`, `harga`,`qty`,`total_harga`,`status_cart`) "
-                     + "VALUES ('"+cartId+"', '"+barangId+"', '"+nama+"', '"+hargabarang+"','"+jumlah+"','"+total+"','"+status+"')";
+        String query = "INSERT INTO `tb_cart` (`id_cart`, `id_barang`, `nama`, `harga`,`qty`,`total_harga`, `total_hargaPokok`, `status_cart`) "
+                     + "VALUES ('"+cartId+"', '"+barangId+"', '"+nama+"', '"+hargabarang+"','"+jumlah+"','"+total+"', '"+hargaPokokAdd+"','"+status+"')";
         
         try{
             //menyiapkan statement untuk di eksekusi
@@ -448,6 +479,9 @@ public class Panel4 extends javax.swing.JPanel {
             clear();
             
         }
+       }else{
+           System.out.println("Harga Pokok Tidak Ditemukan");
+       }
     }
 
     private void totalnya() {
@@ -468,10 +502,27 @@ public class Panel4 extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Gagal menghitung total bayar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
     }
+    
+    private void totalModal() {
+    String query = "SELECT SUM(total_hargaPokok) AS total_modal FROM tb_cart WHERE status_cart = 'cart'";
+
+    try (PreparedStatement ps = connect.prepareStatement(query)) {
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                // Ambil nilai total Harga Pokok dari tb_cart
+                TotalhargaPokok = rs.getInt("total_modal");
+                
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Gagal menghitung total bayar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }
   
     private void loadBarang(String productCode) {
         // Query SQL untuk mendapatkan informasi produk berdasarkan kode produk
-        String query = "SELECT nama, harga,stok, satuan FROM tb_barang WHERE id_barang = ?";
+        String query = "SELECT nama, harga_jual, stok, satuan FROM tb_barang WHERE id_barang = ?";
         
         try (PreparedStatement preparedStatement = connect.prepareStatement(query)) {
             preparedStatement.setString(1, productCode);
@@ -480,7 +531,7 @@ public class Panel4 extends javax.swing.JPanel {
                 if (resultSet.next()) {
                     // Memuat data ke dalam JTextField sesuai dengan hasil query
                     txt_namaProduk.setText(resultSet.getString("nama"));
-                    txt_harga.setText(resultSet.getString("harga"));
+                    txt_harga.setText(resultSet.getString("harga_jual"));
                     txt_stok.setText(resultSet.getString("stok"));
                     txt_satuan.setText(resultSet.getString("satuan"));
                 } else {
@@ -602,7 +653,7 @@ public class Panel4 extends javax.swing.JPanel {
         return new ByteArrayInputStream(outputStream.toByteArray());
     }
 
-    private void totalHarga(String Harga, String qty) {
+    private void totalHarga(String Harga, String qty, String idbarang) {
     try {
         // Mengambil nilai harga dan jumlah dari JTextField dan mengonversinya ke integer
         int harga = Integer.parseInt(Harga);
@@ -610,9 +661,12 @@ public class Panel4 extends javax.swing.JPanel {
 
         // Menghitung total harga
         int totalHarga = harga * jumlah;
+        
+        int hargaPokok = cekHargaPokok(idbarang);
+        hargaPokokAdd = hargaPokok * jumlah;
 
         // Menetapkan nilai totalHarga ke dalam JTextField txtTotalHarga
-        txt_totalHarga.setText(String.valueOf(totalHarga));
+        txt_totalHarga.setText(String.valueOf(totalHarga)); 
     } catch (NumberFormatException e) {
         // Tangani eksepsi jika nilai harga atau jumlah tidak valid (bukan angka)
         JOptionPane.showMessageDialog(null, "Masukkan nilai harga dan jumlah yang valid.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -716,17 +770,18 @@ public class Panel4 extends javax.swing.JPanel {
         int totalBayar = Integer.parseInt(txt_jumlahUang.getText());
         int kembalian = Integer.parseInt(txt_kembalian.getText());
         String date = txt_date.getText();
+        int totalHargaPokok = TotalhargaPokok;
         String dateIn = convertDateFormat(date, "dd-MMMM-yyyy", "yyyy/MM/dd");
          
         
         //query untuk memasukan data
         
-        String  query = "INSERT INTO `tb_transaksi` (`id_cart`, `id_member`, `total_harga`, `total_bayar`,`jumlah_kembalian`,`tanggal_transaksi`) "
-                     + "VALUES ('"+cartId+"', '"+memberId+"', '"+totalHarga+"', '"+totalBayar+"','"+kembalian+"','"+dateIn+"')";
+        String  query = "INSERT INTO `tb_transaksi` (`id_cart`, `id_member`, `total_harga`, `total_bayar`,`jumlah_kembalian`, `total_modal`, `tanggal_transaksi`) "
+                     + "VALUES ('"+cartId+"', '"+memberId+"', '"+totalHarga+"', '"+totalBayar+"','"+kembalian+"', '"+totalHargaPokok+"', '"+dateIn+"')";
         
         if(memberId == 0){
-            query = "INSERT INTO `tb_transaksi` (`id_cart`, `total_harga`, `total_bayar`,`jumlah_kembalian`,`tanggal_transaksi`) "
-                     + "VALUES ('"+cartId+"', '"+totalHarga+"', '"+totalBayar+"','"+kembalian+"','"+dateIn+"')";
+            query = "INSERT INTO `tb_transaksi` (`id_cart`, `total_harga`, `total_bayar`,`jumlah_kembalian`, `total_modal`, `tanggal_transaksi`) "
+                     + "VALUES ('"+cartId+"', '"+totalHarga+"', '"+totalBayar+"','"+kembalian+"', '"+totalHargaPokok+"','"+dateIn+"')";
         }
         
         try{
@@ -829,7 +884,7 @@ public class Panel4 extends javax.swing.JPanel {
 
     private void updateHargaProduk(int idProduk, int hargaBaru) {
         // Update harga pada tb_barang
-        String updateQuery = "UPDATE tb_barang SET harga = ? WHERE id_barang = ?";
+        String updateQuery = "UPDATE tb_barang SET harga_jual = ? WHERE id_barang = ?";
         try (Connection connection = DatabaseKoneksi.createConnection();
              PreparedStatement stmn = connection.prepareStatement(updateQuery)) {
 
@@ -959,6 +1014,11 @@ public class Panel4 extends javax.swing.JPanel {
         });
 
         txt_totalHarga.setHint("Total Harga");
+        txt_totalHarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_totalHargaActionPerformed(evt);
+            }
+        });
 
         txt_stok.setHint("Stok");
 
@@ -1266,7 +1326,7 @@ public class Panel4 extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_namaMemberActionPerformed
 
     private void txt_jumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_jumlahActionPerformed
-        totalHarga(txt_harga.getText(), txt_jumlah.getText());
+        totalHarga(txt_harga.getText(), txt_jumlah.getText(), txt_kodeBarang.getText());
     }//GEN-LAST:event_txt_jumlahActionPerformed
 
     private void btn_bayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bayarActionPerformed
@@ -1286,6 +1346,7 @@ public class Panel4 extends javax.swing.JPanel {
         deleteCart();
         tampilData();
         totalnya();
+        totalModal();
     }//GEN-LAST:event_btn_hapusDataActionPerformed
 
     private void btn_cariBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariBarangActionPerformed
@@ -1303,6 +1364,10 @@ public class Panel4 extends javax.swing.JPanel {
     private void btn_clearMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearMemberActionPerformed
         clearMember();
     }//GEN-LAST:event_btn_clearMemberActionPerformed
+
+    private void txt_totalHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_totalHargaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_totalHargaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

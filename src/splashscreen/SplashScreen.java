@@ -66,21 +66,18 @@ public class SplashScreen extends javax.swing.JDialog {
             curvesPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(curvesPanel1Layout.createSequentialGroup()
                 .addGroup(curvesPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(curvesPanel1Layout.createSequentialGroup()
                         .addGroup(curvesPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(curvesPanel1Layout.createSequentialGroup()
-                                .addGap(170, 170, 170)
-                                .addComponent(pro, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(curvesPanel1Layout.createSequentialGroup()
                                 .addGap(110, 110, 110)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 108, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(curvesPanel1Layout.createSequentialGroup()
+                                .addGap(170, 170, 170)
+                                .addComponent(pro, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 108, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(curvesPanel1Layout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addComponent(lbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(lbStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         curvesPanel1Layout.setVerticalGroup(
             curvesPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,7 +113,7 @@ public class SplashScreen extends javax.swing.JDialog {
             @Override
             public void run() {
                 try {
-                    doTask("Connect To Database ...", 10);
+                    doTask("Menghubungkan ke Database ...", 10);
                     doTask("loading ...", 20);
                     doTask("loading ...", 30);
                     doTask("loading ...", 40);

@@ -192,11 +192,11 @@ private void hapusData() {
         jPanel1.setOpaque(false);
 
         txt_kodesuppliyer.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        txt_kodesuppliyer.setHint("Kode Barang");
+        txt_kodesuppliyer.setHint("Kode Pemasok");
         txt_kodesuppliyer.setName(""); // NOI18N
 
         txt_namasuppliyer.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        txt_namasuppliyer.setHint("Nama Barang");
+        txt_namasuppliyer.setHint("Nama Pemasok");
         txt_namasuppliyer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_namasuppliyerActionPerformed(evt);
@@ -205,7 +205,7 @@ private void hapusData() {
 
         jLabel1.setFont(new java.awt.Font("Prompt", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Hapus Suppliyer");
+        jLabel1.setText("Hapus Pemasok");
 
         btn_hapus.setForeground(new java.awt.Color(255, 255, 255));
         btn_hapus.setText("Hapus");
@@ -279,13 +279,13 @@ private void hapusData() {
                 .addComponent(txt_kodesuppliyer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_namasuppliyer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_alamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addGap(46, 46, 46)
                 .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

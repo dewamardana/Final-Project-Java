@@ -1,6 +1,7 @@
 
 package UserPage;
 
+
 import Koneksi.DatabaseKoneksi;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -24,6 +25,7 @@ public class Panel5 extends javax.swing.JPanel {
        initComponents();
        
         tampilData(0,"none");
+        cekKeuntungan();
     }
     
     private  String convertDateFormat(String dateStr, String inputFormat, String outputFormat) {
@@ -40,29 +42,31 @@ public class Panel5 extends javax.swing.JPanel {
         
         table.setColumnCount(0);
             
-        tabel_member.setModel(table);
+        tabel_dataTransaksi.setModel(table);
         table.addColumn("ID ");
         table.addColumn("Cart ID");
         table.addColumn("Member ID");
         table.addColumn("Subtotal");
+        table.addColumn("Modal");
         table.addColumn("Jumlah Uang");
         table.addColumn("Jumlah Kembalian");
         table.addColumn("Tanggal Transaksi");
         
         // Mendapatkan model kolom dari tabel
-        TableColumnModel columnModel = tabel_member.getColumnModel();
+        TableColumnModel columnModel = tabel_dataTransaksi.getColumnModel();
 
         // Mengatur lebar kolom sesuai kebutuhan
         columnModel.getColumn(0).setPreferredWidth(50); // Ganti 50 dengan lebar yang diinginkan
         columnModel.getColumn(1).setPreferredWidth(100); // Ganti 100 dengan lebar yang diinginkan
         columnModel.getColumn(2).setPreferredWidth(80); // Ganti 80 dengan lebar yang diinginkan
-        columnModel.getColumn(3).setPreferredWidth(120); // Ganti 120 dengan lebar yang diinginkan
-        columnModel.getColumn(4).setPreferredWidth(100); // Ganti 100 dengan lebar yang diinginkan
-        columnModel.getColumn(5).setPreferredWidth(120); // Ganti 120 dengan lebar yang diinginkan
-        columnModel.getColumn(6).setPreferredWidth(150); 
+        columnModel.getColumn(3).setPreferredWidth(120);
+        columnModel.getColumn(4).setPreferredWidth(120);// Ganti 120 dengan lebar yang diinginkan
+        columnModel.getColumn(5).setPreferredWidth(100); // Ganti 100 dengan lebar yang diinginkan
+        columnModel.getColumn(6).setPreferredWidth(120); // Ganti 120 dengan lebar yang diinginkan
+        columnModel.getColumn(7).setPreferredWidth(150); 
         
         //untuk mengahapus baris setelah input
-        int row = tabel_member.getRowCount();
+        int row = tabel_dataTransaksi.getRowCount();
         for(int a = 0 ; a < row ; a++){
             table.removeRow(0);
         }
@@ -82,6 +86,7 @@ public class Panel5 extends javax.swing.JPanel {
                     String idCart = rslt.getString("id_cart");
                     String idMember = rslt.getString("id_member");
                     String total = rslt.getString("total_harga");
+                    String modal = rslt.getString("total_modal");
                     String bayar = rslt.getString("total_bayar");
                     String kembali = rslt.getString("jumlah_kembalian");
                     String date = rslt.getString("tanggal_transaksi");
@@ -90,12 +95,12 @@ public class Panel5 extends javax.swing.JPanel {
                    
            
                 //masukan semua data kedalam array
-                String[] data = {idTransaksi,idCart,idMember,total,bayar,kembali,date};
+                String[] data = {idTransaksi,idCart,idMember,total,modal,bayar,kembali,date};
                 //menambahakan baris sesuai dengan data yang tersimpan diarray
                 table.addRow(data);
             }
                 //mengeset nilai yang ditampung agar muncul di table
-                tabel_member.setModel(table);
+                tabel_dataTransaksi.setModel(table);
             
         }catch(Exception e){
             System.out.println(e);
@@ -175,6 +180,22 @@ private void cariData() {
     
 }
 
+
+    private void cekKeuntungan(){
+        
+        int jumlahTransaksi = 0, hargaPokok = 0, hasilPenjualan = 0, keuntungan = 0;
+        for (int i = 0; i < table.getRowCount(); i++) {
+                jumlahTransaksi++;
+                hargaPokok += Integer.valueOf(table.getValueAt(i, 4).toString());
+                hasilPenjualan += Integer.valueOf(table.getValueAt(i, 3).toString()); 
+            }
+        keuntungan = hasilPenjualan - hargaPokok;
+        lb_jumlahTransaksi.setText(String.valueOf(jumlahTransaksi));
+        lb_hargaPokok.setText(String.valueOf(hargaPokok));
+        lb_hasilPenjualan.setText(String.valueOf(hasilPenjualan));
+        lb_keuntungan.setText(String.valueOf(keuntungan));
+    }
+    
 private String convertBulanToAngka(String namaBulan) {
     switch (namaBulan.toLowerCase()) {
             case "januari":
@@ -222,8 +243,24 @@ private String convertBulanToAngka(String namaBulan) {
         jLabel1 = new javax.swing.JLabel();
         combo_bulan = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabel_member = new TabelKomponen.TableDark();
+        tabel_dataTransaksi = new TabelKomponen.TableDark();
         btn_refresh = new JpanelKomponen.Button();
+        panelTransparent2 = new Komponen.PanelTransparent();
+        jLabel4 = new javax.swing.JLabel();
+        lb_jumlahTransaksi = new javax.swing.JLabel();
+        lb_hasilPenjualan1 = new javax.swing.JLabel();
+        panelTransparent4 = new Komponen.PanelTransparent();
+        jLabel8 = new javax.swing.JLabel();
+        lb_keuntungan = new javax.swing.JLabel();
+        lb_hasilPenjualan4 = new javax.swing.JLabel();
+        panelTransparent5 = new Komponen.PanelTransparent();
+        jLabel10 = new javax.swing.JLabel();
+        lb_hasilPenjualan = new javax.swing.JLabel();
+        lb_hasilPenjualan2 = new javax.swing.JLabel();
+        panelTransparent6 = new Komponen.PanelTransparent();
+        jLabel12 = new javax.swing.JLabel();
+        lb_hargaPokok = new javax.swing.JLabel();
+        lb_hasilPenjualan3 = new javax.swing.JLabel();
 
         dateChooser1.setDateFormat("dd-MMMM-yyyy");
 
@@ -265,7 +302,6 @@ private String convertBulanToAngka(String namaBulan) {
         jLabel1.setText("Cari Transaksi");
 
         combo_bulan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" }));
-        combo_bulan.setSelectedIndex(-1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -309,7 +345,7 @@ private String convertBulanToAngka(String namaBulan) {
         background1.add(jPanel1);
         jPanel1.setBounds(60, 60, 330, 470);
 
-        tabel_member.setModel(new javax.swing.table.DefaultTableModel(
+        tabel_dataTransaksi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -328,16 +364,16 @@ private String convertBulanToAngka(String namaBulan) {
                 return canEdit [columnIndex];
             }
         });
-        tabel_member.setFont(new java.awt.Font("Prompt", 0, 12)); // NOI18N
-        tabel_member.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabel_dataTransaksi.setFont(new java.awt.Font("Prompt", 0, 12)); // NOI18N
+        tabel_dataTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabel_memberMouseClicked(evt);
+                tabel_dataTransaksiMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabel_member);
+        jScrollPane1.setViewportView(tabel_dataTransaksi);
 
         background1.add(jScrollPane1);
-        jScrollPane1.setBounds(430, 50, 820, 470);
+        jScrollPane1.setBounds(430, 50, 820, 250);
 
         btn_refresh.setForeground(new java.awt.Color(255, 255, 255));
         btn_refresh.setText("Refresh");
@@ -347,7 +383,179 @@ private String convertBulanToAngka(String namaBulan) {
             }
         });
         background1.add(btn_refresh);
-        btn_refresh.setBounds(480, 530, 80, 32);
+        btn_refresh.setBounds(430, 310, 80, 32);
+
+        panelTransparent2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        jLabel4.setFont(new java.awt.Font("Prompt", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Jumlah Transaksi");
+
+        lb_jumlahTransaksi.setFont(new java.awt.Font("Prompt", 1, 24)); // NOI18N
+        lb_jumlahTransaksi.setForeground(new java.awt.Color(255, 255, 255));
+        lb_jumlahTransaksi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_jumlahTransaksi.setText("0");
+
+        lb_hasilPenjualan1.setFont(new java.awt.Font("Prompt", 1, 24)); // NOI18N
+        lb_hasilPenjualan1.setForeground(new java.awt.Color(255, 255, 255));
+        lb_hasilPenjualan1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_hasilPenjualan1.setText("Rp.");
+
+        javax.swing.GroupLayout panelTransparent2Layout = new javax.swing.GroupLayout(panelTransparent2);
+        panelTransparent2.setLayout(panelTransparent2Layout);
+        panelTransparent2Layout.setHorizontalGroup(
+            panelTransparent2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+            .addGroup(panelTransparent2Layout.createSequentialGroup()
+                .addComponent(lb_hasilPenjualan1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lb_jumlahTransaksi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelTransparent2Layout.setVerticalGroup(
+            panelTransparent2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTransparent2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addGroup(panelTransparent2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_jumlahTransaksi)
+                    .addComponent(lb_hasilPenjualan1))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        background1.add(panelTransparent2);
+        panelTransparent2.setBounds(430, 360, 400, 120);
+
+        panelTransparent4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        jLabel8.setFont(new java.awt.Font("Prompt", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Keuntungan");
+
+        lb_keuntungan.setFont(new java.awt.Font("Prompt", 1, 24)); // NOI18N
+        lb_keuntungan.setForeground(new java.awt.Color(255, 255, 255));
+        lb_keuntungan.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_keuntungan.setText("0");
+
+        lb_hasilPenjualan4.setFont(new java.awt.Font("Prompt", 1, 24)); // NOI18N
+        lb_hasilPenjualan4.setForeground(new java.awt.Color(255, 255, 255));
+        lb_hasilPenjualan4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_hasilPenjualan4.setText("Rp.");
+
+        javax.swing.GroupLayout panelTransparent4Layout = new javax.swing.GroupLayout(panelTransparent4);
+        panelTransparent4.setLayout(panelTransparent4Layout);
+        panelTransparent4Layout.setHorizontalGroup(
+            panelTransparent4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+            .addGroup(panelTransparent4Layout.createSequentialGroup()
+                .addComponent(lb_hasilPenjualan4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lb_keuntungan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelTransparent4Layout.setVerticalGroup(
+            panelTransparent4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTransparent4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelTransparent4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_keuntungan)
+                    .addComponent(lb_hasilPenjualan4))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        background1.add(panelTransparent4);
+        panelTransparent4.setBounds(840, 500, 400, 120);
+
+        panelTransparent5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        jLabel10.setFont(new java.awt.Font("Prompt", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Hasil Penjualan");
+
+        lb_hasilPenjualan.setFont(new java.awt.Font("Prompt", 1, 24)); // NOI18N
+        lb_hasilPenjualan.setForeground(new java.awt.Color(255, 255, 255));
+        lb_hasilPenjualan.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_hasilPenjualan.setText("0");
+
+        lb_hasilPenjualan2.setFont(new java.awt.Font("Prompt", 1, 24)); // NOI18N
+        lb_hasilPenjualan2.setForeground(new java.awt.Color(255, 255, 255));
+        lb_hasilPenjualan2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_hasilPenjualan2.setText("Rp.");
+
+        javax.swing.GroupLayout panelTransparent5Layout = new javax.swing.GroupLayout(panelTransparent5);
+        panelTransparent5.setLayout(panelTransparent5Layout);
+        panelTransparent5Layout.setHorizontalGroup(
+            panelTransparent5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+            .addGroup(panelTransparent5Layout.createSequentialGroup()
+                .addComponent(lb_hasilPenjualan2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lb_hasilPenjualan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelTransparent5Layout.setVerticalGroup(
+            panelTransparent5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTransparent5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelTransparent5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_hasilPenjualan)
+                    .addComponent(lb_hasilPenjualan2))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        background1.add(panelTransparent5);
+        panelTransparent5.setBounds(430, 500, 400, 120);
+
+        panelTransparent6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        jLabel12.setFont(new java.awt.Font("Prompt", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Harga Pokok");
+
+        lb_hargaPokok.setFont(new java.awt.Font("Prompt", 1, 24)); // NOI18N
+        lb_hargaPokok.setForeground(new java.awt.Color(255, 255, 255));
+        lb_hargaPokok.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_hargaPokok.setText("0");
+
+        lb_hasilPenjualan3.setFont(new java.awt.Font("Prompt", 1, 24)); // NOI18N
+        lb_hasilPenjualan3.setForeground(new java.awt.Color(255, 255, 255));
+        lb_hasilPenjualan3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_hasilPenjualan3.setText("Rp.");
+
+        javax.swing.GroupLayout panelTransparent6Layout = new javax.swing.GroupLayout(panelTransparent6);
+        panelTransparent6.setLayout(panelTransparent6Layout);
+        panelTransparent6Layout.setHorizontalGroup(
+            panelTransparent6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTransparent6Layout.createSequentialGroup()
+                .addComponent(lb_hasilPenjualan3)
+                .addGap(0, 0, 0)
+                .addComponent(lb_hargaPokok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelTransparent6Layout.setVerticalGroup(
+            panelTransparent6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTransparent6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addGroup(panelTransparent6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_hargaPokok)
+                    .addComponent(lb_hasilPenjualan3))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        background1.add(panelTransparent6);
+        panelTransparent6.setBounds(840, 360, 400, 120);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -365,11 +573,12 @@ private String convertBulanToAngka(String namaBulan) {
 
     private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed
         cariData();
+        cekKeuntungan();
     }//GEN-LAST:event_btn_cariActionPerformed
 
-    private void tabel_memberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_memberMouseClicked
+    private void tabel_dataTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_dataTransaksiMouseClicked
                 
-    }//GEN-LAST:event_tabel_memberMouseClicked
+    }//GEN-LAST:event_tabel_dataTransaksiMouseClicked
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         clear();
@@ -377,6 +586,8 @@ private String convertBulanToAngka(String namaBulan) {
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
        tampilData(0,"none");
+       cekKeuntungan();
+       
     }//GEN-LAST:event_btn_refreshActionPerformed
 
     private void txt_tanggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tanggalActionPerformed
@@ -392,10 +603,26 @@ private String convertBulanToAngka(String namaBulan) {
     private javax.swing.JComboBox<String> combo_bulan;
     private date.DateChooser dateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.ButtonGroup jk;
-    private TabelKomponen.TableDark tabel_member;
+    private javax.swing.JLabel lb_hargaPokok;
+    private javax.swing.JLabel lb_hasilPenjualan;
+    private javax.swing.JLabel lb_hasilPenjualan1;
+    private javax.swing.JLabel lb_hasilPenjualan2;
+    private javax.swing.JLabel lb_hasilPenjualan3;
+    private javax.swing.JLabel lb_hasilPenjualan4;
+    private javax.swing.JLabel lb_jumlahTransaksi;
+    private javax.swing.JLabel lb_keuntungan;
+    private Komponen.PanelTransparent panelTransparent2;
+    private Komponen.PanelTransparent panelTransparent4;
+    private Komponen.PanelTransparent panelTransparent5;
+    private Komponen.PanelTransparent panelTransparent6;
+    private TabelKomponen.TableDark tabel_dataTransaksi;
     private JpanelKomponen.TextField txt_tahun;
     private JpanelKomponen.TextField txt_tanggal;
     // End of variables declaration//GEN-END:variables

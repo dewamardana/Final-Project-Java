@@ -60,7 +60,7 @@ private void tampilData(){
                    
                     String id= rslt.getString("id_barang");
                     String nama = rslt.getString("nama");
-                    String harga = rslt.getString("harga");
+                    String harga = rslt.getString("harga_jual");
                     String stok = rslt.getString("stok");
                     String satuan = rslt.getString("satuan");
                     String dateIn = rslt.getString("tanggal_masuk");
@@ -109,7 +109,7 @@ private void cari(){
                    
                     String id= rslt.getString("id_barang");
                     String nama = rslt.getString("nama");
-                    String harga = rslt.getString("harga");
+                    String harga = rslt.getString("harga_jual");
                     String stok = rslt.getString("stok");
                     String satuan = rslt.getString("satuan");
                     String dateIn = rslt.getString("tanggal_masuk");

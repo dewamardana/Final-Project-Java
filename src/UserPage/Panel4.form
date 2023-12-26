@@ -180,6 +180,9 @@
               <Properties>
                 <Property name="hint" type="java.lang.String" value="Total Harga"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_totalHargaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="JpanelKomponen.TextField" name="txt_stok">
               <Properties>
