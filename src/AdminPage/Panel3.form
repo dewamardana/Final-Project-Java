@@ -90,24 +90,24 @@
                               </Group>
                               <Component id="txt_kodebarang" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="txt_date" min="-2" pref="258" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="button2" min="-2" pref="42" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Component id="txt_hargaJual" pref="318" max="32767" attributes="0"/>
                               <Component id="txt_margin" alignment="1" max="32767" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="txt_date" min="-2" pref="258" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btn_clear" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Component id="button2" min="-2" pref="42" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="48" max="32767" attributes="0"/>
+                      <EmptySpace pref="44" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btn_hapus" min="-2" pref="176" max="-2" attributes="0"/>
-                          <Component id="btn_clear" min="-2" pref="60" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btn_hapus" min="-2" pref="176" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -146,9 +146,9 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btn_hapus" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btn_clear" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -196,7 +196,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Tambah Produk"/>
+                <Property name="text" type="java.lang.String" value="Hapus Produk"/>
               </Properties>
             </Component>
             <Component class="JpanelKomponen.Button" name="btn_hapus">

@@ -90,24 +90,24 @@
                               </Group>
                               <Component id="txt_kodebarang" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="txt_date" min="-2" pref="258" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="button2" min="-2" pref="42" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Component id="txt_hargaJual" pref="318" max="32767" attributes="0"/>
                               <Component id="txt_margin" alignment="1" max="32767" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="txt_date" min="-2" pref="258" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btn_clear" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Component id="button2" min="-2" pref="42" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="48" max="32767" attributes="0"/>
+                      <EmptySpace pref="44" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btn_simpan" min="-2" pref="176" max="-2" attributes="0"/>
-                          <Component id="btn_clear" min="-2" pref="60" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btn_simpan" min="-2" pref="176" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -146,9 +146,9 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btn_simpan" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btn_clear" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -294,15 +294,15 @@
             <Component class="javax.swing.JComboBox" name="combo_satuan">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="5">
+                  <StringArray count="6">
                     <StringItem index="0" value="Pack"/>
                     <StringItem index="1" value="Pcs"/>
                     <StringItem index="2" value="Kg"/>
                     <StringItem index="3" value="Ml"/>
                     <StringItem index="4" value="Liter"/>
+                    <StringItem index="5" value="Dus"/>
                   </StringArray>
                 </Property>
-                <Property name="selectedIndex" type="int" value="-1"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
